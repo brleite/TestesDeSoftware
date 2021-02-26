@@ -35,7 +35,7 @@ namespace Features.Tests
         {
             var genero = new Faker().PickRandom<Name.Gender>();
 
-            var clientes = new Faker<Cliente>("pt_BR")
+            var clientes = new Faker<Cliente>("pt")
                 .CustomInstantiator(f => new Cliente(
                         Guid.NewGuid(),
                         f.Name.FirstName(genero),
