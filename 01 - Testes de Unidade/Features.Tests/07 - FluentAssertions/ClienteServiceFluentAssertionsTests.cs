@@ -1,10 +1,12 @@
 ﻿using Features.Clientes;
 using FluentAssertions;
+using FluentTimeSpan;
 using MediatR;
 using Moq;
 using System.Linq;
 using System.Threading;
 using Xunit;
+using System;
 
 namespace Features.Tests
 {
@@ -74,6 +76,12 @@ namespace Features.Tests
 
             clientes.Should().HaveCountGreaterOrEqualTo(1).And.OnlyHaveUniqueItems();
             clientes.Should().NotContain(c => !c.Ativo);
+
+            // Essa validação seria mais interessante em um teste de integração e não em um teste de unidade
+            _clienteService.ExecutionTimeOf(c => c.ObterTodosAtivos())
+                .Should()
+                // .BeLessOrEqualTo(TimeSpan.FromMilliseconds(50), "é executado milhares de vezes por segundo");
+                .BeLessOrEqualTo(50.Milliseconds(), "é executado milhares de vezes por segundo");
         }
     }
 }
