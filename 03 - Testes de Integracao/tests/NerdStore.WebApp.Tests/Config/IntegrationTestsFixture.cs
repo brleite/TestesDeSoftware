@@ -35,8 +35,8 @@ namespace NerdStore.WebApp.Tests.Config
             {
                 AllowAutoRedirect = true,
                 BaseAddress = new Uri("http://localhost"),
-                HandleCookies = true,
-                MaxAutomaticRedirections = 7
+                HandleCookies = true, // Os cookies são enviados nas requisições seguintes após o seu recebimento
+                MaxAutomaticRedirections = 7 // Para evitar loop de redirecionamentos
             };
 
             Factory = new LojaAppFactory<TStartup>();
